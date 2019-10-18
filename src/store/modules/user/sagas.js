@@ -37,7 +37,7 @@ export function* getCity({payload}) {
   try {
     Geocoder.init('AIzaSyAAtMzglUzRDY2_dSogBVr-QANlOLSdlso');
 
-    const response = yield Geocoder.from('-21.9353911', '-48.0006562');
+    const response = yield Geocoder.from(payload.latitude, payload.longitude);
 
     console.tron.log(response);
     const addressComponent =

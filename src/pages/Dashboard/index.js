@@ -12,7 +12,13 @@ import {withNavigationFocus} from 'react-navigation';
 import Header from '../../components/Header';
 import CurrentPosition from '../../components/locations';
 
-import {Container} from './styles';
+import {Container} from './styles'; 
+
+import UserList from '../../components/UserList';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { client } from '../../services/apollo';
+
+
 
 function Dashboard({navigation}) {
   const dispatch = useDispatch();
@@ -34,12 +40,18 @@ function Dashboard({navigation}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return (<>
     <Container>
       <Header navigation={navigation} />
       <Text>Cidade: {city}</Text>
-      {/* <CurrentPosition /> */}
+      {/* <CurrentPosition /> */}   
+
+      
     </Container>
+     <ApolloProvider client={client}>         
+          <UserList />    
+     </ApolloProvider>
+     </>
   );
 }
 
