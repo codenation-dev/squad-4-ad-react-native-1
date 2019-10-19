@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'devFinder',
       storage: AsyncStorage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'devs'],
     },
     reducers,
   );

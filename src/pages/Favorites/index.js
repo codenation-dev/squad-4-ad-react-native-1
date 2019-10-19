@@ -1,18 +1,38 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useState} from 'react';
+import {useSelector, dispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {withNavigationFocus} from 'react-navigation';
 
 import Header from '../../components/Header';
+import UserList from '../../components/UserList';
+import DevDescriptions from '../DevDescriptions';
+
 import {Container} from './styles';
+import {setActiveDevRequest} from '../../store/modules/devs/actions';
 
 function Favorites({navigation}) {
+  const devs = useSelector(state => state.devs.favoriteDevs);
+
+  const [modalVisible, setModalVisible] = useState('');
+
+  function closeModal() {
+    setModalVisible(false);
+  }
+
+  function openModal(dev) {
+    dispatch(setActiveDevRequest(dev));
+    setModalVisible(true);
+  }
+
   return (
-    <Container>
-      <Header navigation={navigation} />
-      <Text>Favoritos</Text>
-    </Container>
+    <>
+      <Container>
+        <Header navigation={navigation} />
+      </Container>
+      <UserList openModal={openModal} devs={devs} />
+      <DevDescriptions modalVisible={modalVisible} closeModal={closeModal} />
+    </>
   );
 }
 

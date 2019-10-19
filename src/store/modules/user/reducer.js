@@ -13,11 +13,6 @@ export default function user(state = INITIAL_STATE, action) {
         break;
       }
 
-      case '@user/UPDATE_PROFILE_SUCCESS': {
-        draft.profile = action.payload.profile;
-        break;
-      }
-
       case '@user/GET_CITY_SUCCESS': {
         draft.address = action.payload.address;
         break;
