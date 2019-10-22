@@ -27,6 +27,8 @@ function Dashboard({navigation}) {
   const [modalVisible, setModalVisible] = useState('');
 
   const [devs, setDevs] = useState([]);
+  const [existDevInCity, setExistDevInCity] = useState(true);
+
   const city = useSelector(state => state.user.address);
 
   const get_users = Apollo.gql(`
@@ -72,8 +74,9 @@ function Dashboard({navigation}) {
   }
 
   if (data) {
-    if (devs.length === 0) {
+    if (devs.length === 0 && existDevInCity) {
       setDevs(data.search.edges);
+      setExistDevInCity(false);
     }
   }
 
@@ -94,7 +97,13 @@ function Dashboard({navigation}) {
       {loading ? (
         <ActivityIndicator size="large" color="#EE2D58" />
       ) : (
-        <UserList openModal={openModal} devs={devs} />
+        <>
+        {!existDevInCity ? (
+          <UserList openModal={openModal} devs={devs} />
+        ) : (
+          <Text>Não encontramos nenhum desenvolvedor na cidade</Text>
+        )}
+        </>
       )}
       <DevDescriptions modalVisible={modalVisible} closeModal={closeModal} />
     </>
