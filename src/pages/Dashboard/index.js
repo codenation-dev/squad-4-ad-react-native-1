@@ -32,10 +32,11 @@ function Dashboard({navigation}) {
   const city = useSelector(state => state.user.address);
 
   const get_users = Apollo.gql(`
-  query gitUsers($location: String!, $first: Int!){
-    search(query: $location, type: USER, first: $first) {
+  query gitUsers($location: String!, $first: Int!,  $cursor: String){
+    search(query: $location, type: USER, first: $first, after: $cursor) {
       edges {
-        node {
+        cursor
+        node {  
           ... on User {
               id
               avatarUrl
@@ -46,13 +47,17 @@ function Dashboard({navigation}) {
             }          
       }
       }
+      pageInfo { 
+        startCursor
+        endCursor
+    }
     }
   }
   `);
 
   const loc = 'location:'.concat(city);
   // const loc = "location:brasil";
-  const {loading, error, data} = useQuery(get_users, {
+  const {loading, error, data, fetchMore} = useQuery(get_users, {
     variables: {location: loc, first: 20},
   });
 
@@ -75,7 +80,7 @@ function Dashboard({navigation}) {
 
   if (data) {
     if (devs.length === 0 && existDevInCity) {
-      setDevs(data.search.edges);
+      setDevs(data);
       setExistDevInCity(false);
     }
   }
@@ -99,7 +104,7 @@ function Dashboard({navigation}) {
       ) : (
         <>
         {!existDevInCity ? (
-          <UserList openModal={openModal} devs={devs} />
+          <UserList openModal={openModal} devs={devs} fetchMore={fetchMore}/>
         ) : (
           <Text>Não encontramos nenhum desenvolvedor na cidade</Text>
         )}
