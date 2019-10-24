@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {closeActiveDev, setFavoriteDev} from '../../store/modules/devs/actions';
+import {closeActiveDev} from '../../store/modules/devs/actions';
 import Button from '../../components/Button';
 
 import {Text, TouchableOpacity, StatusBar} from 'react-native';

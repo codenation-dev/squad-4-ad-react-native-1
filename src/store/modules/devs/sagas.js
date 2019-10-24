@@ -1,4 +1,3 @@
-import {Alert} from 'react-native';
 import {all, put, call, takeLatest} from 'redux-saga/effects';
 
 import api from '../../../services/api';
@@ -14,7 +13,6 @@ export function* getDev({payload}) {
     ...dev,
     repos: response.data,
   };
-  console.tron.log(newDev);
   yield put(setActiveDevSuccess(newDev));
 }
 

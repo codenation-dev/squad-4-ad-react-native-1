@@ -8,12 +8,10 @@ export function* getCity({payload}) {
   try {
     Geocoder.init('AIzaSyAAtMzglUzRDY2_dSogBVr-QANlOLSdlso');
 
-    // const response = yield Geocoder.from(payload.latitude, payload.longitude);
-    const response = yield Geocoder.from('-8.05428', '-34.8813');
+    const response = yield Geocoder.from(payload.latitude, payload.longitude);
 
-    console.tron.log(response);
     const addressComponent =
-      response.results[0].address_components[3].long_name;
+      response.results[0].address_components[2].long_name;
 
     yield put(getCitySuccess(addressComponent));
   } catch (err) {

@@ -9,16 +9,9 @@ import logo from '../../assets/images/logo.png';
 
 import {signInRequest} from '../../store/modules/auth/actions';
 
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  Platform,
-  Linking,
-  ActivityIndicator,
-} from 'react-native';
+import {Image, Platform, Linking, ActivityIndicator} from 'react-native';
+
+import {LogoContainer, BtnContent, BtnLoginText, BtnLogin} from './styles';
 
 export default function Login({navigation}) {
   const dispatch = useDispatch();
@@ -60,52 +53,20 @@ export default function Login({navigation}) {
 
   return (
     <LinearGradient colors={['#ED4420', '#EE2D58']} style={{flex: 1}}>
-      <View style={styles.logoContainer}>
+      <LogoContainer>
         <Image source={logo} />
 
-        <TouchableOpacity style={styles.btnLogin} onPress={handleSingin}>
-          <View style={styles.btnContent}>
+        <BtnLogin onPress={handleSingin}>
+          <BtnContent>
             <Icon name="github" size={30} color="#FFF" />
             {loading ? (
               <ActivityIndicator size="small" color="#FFF" />
             ) : (
-              <Text style={styles.btnLoginText}>Login with Github</Text>
+              <BtnLoginText>Login with Github</BtnLoginText>
             )}
-          </View>
-        </TouchableOpacity>
-      </View>
+          </BtnContent>
+        </BtnLogin>
+      </LogoContainer>
     </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  logoContainer: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  btnLogin: {
-    width: '80%',
-    height: 45,
-    borderRadius: 5,
-    backgroundColor: '#1B1F23',
-    justifyContent: 'center',
-    marginTop: 35,
-  },
-  btnLoginText: {
-    fontSize: 12,
-    textAlign: 'center',
-    color: '#FFFFFF',
-    marginLeft: 10,
-  },
-  btnContent: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

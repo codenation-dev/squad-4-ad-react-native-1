@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {TouchableOpacity, Text} from 'react-native';
+import {Text} from 'react-native';
 
 import {Container, Avatar, Content, Title, SubTitle} from './styles';
 

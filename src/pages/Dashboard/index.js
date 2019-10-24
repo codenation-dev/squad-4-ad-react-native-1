@@ -103,11 +103,11 @@ function Dashboard({navigation}) {
         <ActivityIndicator size="large" color="#EE2D58" />
       ) : (
         <>
-        {!existDevInCity ? (
-          <UserList openModal={openModal} devs={devs} fetchMore={fetchMore}/>
-        ) : (
-          <Text>Não encontramos nenhum desenvolvedor na cidade</Text>
-        )}
+          {!existDevInCity ? (
+            <UserList openModal={openModal} devs={devs} fetchMore={fetchMore} />
+          ) : (
+            <Text>Não encontramos nenhum desenvolvedor na cidade</Text>
+          )}
         </>
       )}
       <DevDescriptions modalVisible={modalVisible} closeModal={closeModal} />

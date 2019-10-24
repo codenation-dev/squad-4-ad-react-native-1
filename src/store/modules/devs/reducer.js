@@ -38,6 +38,7 @@ export default function user(state = INITIAL_STATE, action) {
       }
 
       case '@auth/SIGN_OUT': {
+        draft.favoriteDevs = [];
         draft.allDevs = [];
         draft.activeDev = {};
         break;

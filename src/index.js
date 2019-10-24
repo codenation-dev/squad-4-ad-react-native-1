@@ -12,7 +12,6 @@ import {store, persistor} from './store';
 import App from './App';
 
 export default function src() {
-  console.tron.log(store);
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
