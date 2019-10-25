@@ -3,7 +3,7 @@ import ApolloBoost from 'apollo-boost';
 export const client = new ApolloBoost({
   uri: 'https://api.github.com/graphql',
   request: operation => {
-    const token = '1f7a5f6ba4b2e76a19fd2c3dcb37739585d9bb45';
+    const token = 'ab44737c628c961a838932f039c98aad9d9f60df';
     if (token) {
       operation.setContext({
         headers: {

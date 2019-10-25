@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {closeActiveDev} from '../../store/modules/devs/actions';
+import {closeActiveDev, setFavoriteDev} from '../../store/modules/devs/actions';
 import Button from '../../components/Button';
 
 import {Text, TouchableOpacity, StatusBar} from 'react-native';
@@ -30,13 +30,20 @@ export default function DevDescriptions({modalVisible, closeModal}) {
 
   const dev = useSelector(state => state.devs.activeDev);
   const devs = useSelector(state => state.devs.favoriteDevs);
+  const allDevs = useSelector(state => state.devs.allDevs);
 
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    const devIsFavorite = devs.find(d => d.login === dev.login);
+    let devIsFavorite;
+    if (devs.length > 0) {
+      devIsFavorite = devs.find(d => d.node.login === dev.login);
+    }
+
     if (devIsFavorite) {
       setFavorite(true);
+    } else {
+      setFavorite(false);
     }
   }, [dev.login, devs]);
 
@@ -47,9 +54,13 @@ export default function DevDescriptions({modalVisible, closeModal}) {
 
   function handleRemoveDevOnFavorites() {
     setFavorite(false);
+    const devsFavorite = devs.filter(d => d.node.login !== dev.login);
+    dispatch(setFavoriteDev(devsFavorite));
   }
 
   function handleAddDevOnFavorites() {
+    const findDev = allDevs.search.edges.find(d => d.node.login === dev.login);
+    dispatch(setFavoriteDev([...devs, findDev]));
     setFavorite(true);
   }
 
