@@ -27,7 +27,8 @@ A aplicação contém/realiza as seguintes funcionalidades:
 
 ```bash
 $ git clone https://github.com/codenation-dev/squad-4-ad-react-native-1.git
-$ cd squad-4-ad-react-native-$ cd squad-4-ad-react-native- -$ cd squad-4-ad-react-native-$ cd squad-4-ad-react-native- 1
+$ cd squad-4-ad-react-native
+$ npm install
 $ react-native run-android
 $ react-native start
 
